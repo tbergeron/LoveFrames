@@ -22,6 +22,7 @@ function newobject:initialize(parent, data)
 	self.texty = 5
 	self.internal = true
 	self.columndata = data
+	self.selected = false
 	
 	-- apply template properties to the object
 	loveframes.templates.ApplyToObject(self)
@@ -81,7 +82,7 @@ function newobject:draw()
 	local drawfunc = skin.DrawColumnListRow or skins[defaultskin].DrawColumnListRow
 	local draw = self.Draw
 	local drawcount = loveframes.drawcount
-	
+
 	-- set the object's draw order
 	self:SetDrawOrder()
 		
@@ -127,7 +128,18 @@ function newobject:mousereleased(x, y, button)
 		local parent2 = parent1:GetParent()
 		local onrowclicked = parent2.OnRowClicked
 		if onrowclicked then
+			-- deselected other rows
+			local list = parent2.internals[1]			
+			for k,v in ipairs(list.children) do
+				v.selected = false
+			end
+
+			-- select selected row
+			self.selected = true
+			
 			onrowclicked(parent2, self, self.columndata)
+		else
+			self.selected = false
 		end
 	end
 	

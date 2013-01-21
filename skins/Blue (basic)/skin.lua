@@ -164,6 +164,13 @@ skin.controls.columnlistrow_border2_color           = bordercolor
 skin.controls.columnlistrow_body2_color             = {200, 200, 200, 255}
 skin.controls.columnlistrow_text_color              = {100, 100, 100, 255}
 
+-- columnlistrow_selected
+skin.controls.columnlistrow_selected_border1_color  = bordercolor
+skin.controls.columnlistrow_selected_body1_color    = {128, 204, 255, 255}
+skin.controls.columnlistrow_selected_border2_color  = bordercolor
+skin.controls.columnlistrow_selected_body2_color    = {128, 204, 255, 255}
+skin.controls.columnlistrow_selected_text_color     = {255, 255, 255, 255}
+
 -- modalbackground
 skin.controls.modalbackground_body_color            = {255, 255, 255, 100}
 
@@ -1413,12 +1420,21 @@ function skin.DrawColumnListRow(object)
 	local parent             = object:GetParent()
 	local cwidth, cheight    = parent:GetParent():GetColumnSize()
 	local theight            = font:getHeight("a")
-	local body1color         = skin.controls.columnlistrow_body1_color
-	local border1color       = skin.controls.columnlistrow_border1_color
-	local body2color         = skin.controls.columnlistrow_body2_color
-	local border2color       = skin.controls.columnlistrow_border2_color
-	local textcolor          = skin.controls.columnlistrow_text_color
+
+	local body1color = skin.controls.columnlistrow_body1_color
+	local border1color = skin.controls.columnlistrow_border1_color
+	local body2color = skin.controls.columnlistrow_body2_color
+	local border2color = skin.controls.columnlistrow_border2_color
+	local textcolor = skin.controls.columnlistrow_text_color
 	
+	if object.selected then
+		body1color = skin.controls.columnlistrow_selected_body1_color
+		border1color = skin.controls.columnlistrow_selected_border1_color
+		body2color = skin.controls.columnlistrow_selected_body2_color
+		border2color = skin.controls.columnlistrow_selected_border2_color
+		textcolor = skin.controls.columnlistrow_selected_text_color
+	end
+		
 	object:SetTextPos(5, height/2 - theight/2)
 	
 	if colorindex == 1 then

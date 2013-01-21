@@ -237,6 +237,20 @@ function newobject:AddRow(...)
 end
 
 --[[---------------------------------------------------------
+	- func: GetSelectedRow()
+	- desc: returns the selected row
+--]]---------------------------------------------------------
+function newobject:GetSelectedRow()
+	local list = self.internals[1]	
+			
+	for k,v in ipairs(list.children) do
+		if v.selected then
+			return v
+		end
+	end
+end
+
+--[[---------------------------------------------------------
 	- func: Getchildrenize()
 	- desc: gets the size of the object's children
 --]]---------------------------------------------------------
